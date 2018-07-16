@@ -62,6 +62,9 @@ public:
 	int findMostFrequentInArray(vector<int> array);
 	int findMostApperse(vector<int> arr);
 	int xor_findDup(vector<int> arr);
+	int findElementWithOddCount(vector<int> arr);
+	void findElement(vector<int> arr);
+	bool isArrayRepeat(vector<int> arr);
 	bool find(int target, std::vector<std::vector<int>> array);
 
 	void replaceSpace(char * str, int length);
@@ -91,6 +94,8 @@ public:
 	double Power(double base, int exponent);
 
 	void reOrderArray(vector<int>& array);
+
+	void reOrderArray2(vector<int>& array);
 
 	ListNode * FindKthToTail(ListNode * pListHead, unsigned int k);
 

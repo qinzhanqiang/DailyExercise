@@ -347,6 +347,27 @@ int main()
 	vector<int> test32 = { 1,2,3,4,4,5,6,7,8,9,10,11,12 };
 	cout << s.xor_findDup(test32) << endl;
 
+	//33
+	cout << endl << "第33个测试实例" << endl;
+	vector<int> test33 = { 1,1,2,2,3,4,4,5,5,6,6,7,7,8,8,9,9,10,11,11,12,12 };
+	s.findElement(test33);
+
+
+	//34
+	cout << endl << "第34个测试实例" << endl;
+	vector<int> test34 = {10, 1,2,3,4,5,6,7,8,6,9 };
+	cout << s.isArrayRepeat(test34) << endl;
+
+	//35
+	cout << endl << "第35个测试实例" << endl;
+	vector<int> test35 = { 10, 1,2,3,4,5,6,7,8,6,9 };
+	s.reOrderArray2(test35);
+	for (int i = 0; i < test35.size(); i++)
+	{
+		cout << test35[i] << endl;
+	}
+
+
 
 	system("pause");
 	return 1;

@@ -240,6 +240,70 @@ int solution::xor_findDup(vector<int> arr)
 
 }
 
+//找到数组中唯一出现奇数次的数（使用异或的方式）
+int solution::findElementWithOddCount(vector<int> arr)
+{
+	int result = arr[0];
+	for (int i = 1; i < arr.size(); i++)
+	{
+		result ^= arr[i];
+	}
+
+	return result;
+}
+
+//一个数组中含有n个元素，其中只有两个出现了奇数次，其他的都出现了偶数次，找出这两个数
+void solution::findElement(vector<int> arr)
+{
+	int s = 0;
+	for (int i = 0; i < arr.size(); i++)
+	{
+		s ^= arr[i];		//假设两个数分别是a,b;则s = a^b; 
+	}
+
+	int s1 = s;
+	int s2 = s;
+	int k = 0;
+	while (!(s1 & 0x01))	//找到s第k位第一次为1，之前的都为0，则a、b中一定第k位一个为1，一个为0
+	{
+		s1 = s1 >> 1;
+		k++;
+	}
+
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if ((arr[i] >> k) & 0x01)	//遍历数组，找到第k位为1的求异或，得到第一个数
+		{
+			s ^= arr[i];
+		}
+	}
+
+	printf("%d,%d\n", s, s^s2);		//a^(a^b) = b
+}
+
+//判定数组中是否有重复元素
+bool solution::isArrayRepeat(vector<int> arr)
+{
+	//int j = arr[0];
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr[i] == i + 1)			//如果arr[i] == i+1
+			continue;
+		if (i > 0)
+		{
+			if(arr[i] == arr[i-1])		//判断与上一个相等的话返回true
+				return true;
+		}
+		if (arr[i] != i + 1)
+		{
+			swap(arr[i], arr[arr[i] - 1]);	
+			i--;
+		}
+	}
+	return false;
+}
+
+
 
 //二维数组查找
 bool solution::find(int target ,vector<vector<int>> array)
@@ -625,6 +689,26 @@ void solution::reOrderArray(vector<int> &array)
 		array.push_back(arr2[i - count]);
 	}
 }
+
+void solution::reOrderArray2(vector<int> &array)
+{
+	vector<int>::iterator begin = array.begin();
+	vector<int>::iterator end = array.end()-1;		//注意-1
+
+	while (begin != end)		//使用两个指针的方式分别指向数组的前后两个位置
+	{
+		while (*begin % 2 == 1 && begin != end)
+		{
+			begin++;
+		}
+		while (*end % 2 == 0 && begin != end)
+		{
+			end--;
+		}
+		swap(*begin, *end);
+	}
+}
+
 
 //输入一个链表，输出该链表中倒数第k个结点。
 ListNode* solution::FindKthToTail(ListNode* pListHead, unsigned int k) 
