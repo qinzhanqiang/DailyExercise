@@ -11,6 +11,8 @@ solution::~solution()
 {
 }
 
+
+
 //实现字符拷贝函数
 char *my_memcpy(char *des, const char* src, unsigned int count)
 {
@@ -303,6 +305,137 @@ bool solution::isArrayRepeat(vector<int> arr)
 	return false;
 }
 
+//将数组中的后面m个数字移动为前面m个数，如1,2,3,4,5,6,7,8,9 ，m=5,移动后变为5,6,7,8,9,1,2,3,4
+//1、使用队列
+//2、使用递归的方法
+void solution::reverseM(vector<int> &arr,int m)
+{
+	int size = arr.size();
+	queue<int> q1, q2;
+	int i = 0;
+	for (i = 0; i < size - m; i++)
+	{
+		q1.push(arr[i]);
+	}
+	for (; i < size; i++)
+	{
+		q2.push(arr[i]);
+	}
+
+	for (i = 0; i < m; i++)
+	{
+		arr[i] = q2.front();
+		q2.pop();
+	}
+	for (; i < size; i++)
+	{
+		arr[i] = q1.front();
+		q1.pop();
+	}
+}
+
+void __reverseM(vector<int>::iterator begin,vector<int>::iterator end)
+{
+	while (begin < end)
+	{
+		swap(*begin, *end);
+		begin++;
+		end--;
+	}
+}
+void solution::reverseM2(vector<int> &arr, int m)
+{
+	
+	
+
+	__reverseM(arr.begin(), arr.end()-1);
+	__reverseM(arr.begin(), arr.begin() + m - 1);
+	__reverseM(arr.begin() + m, arr.end()-1);
+
+}
+
+//计算出数列的前n项数据，使之能被a或b至少一个整除
+vector<int> solution::generateArrayWithAB(int a, int b, int n)
+{
+	vector<int> result;
+	int i = 1,j = 1;
+	int tmpA = 1, tmpB = 1;
+
+	for (int k = 0; k < n; k++)
+	{
+		tmpA = a * i;
+		tmpB = b * j;
+		if (tmpA < tmpB)
+		{
+			result.push_back(tmpA);
+			i++;
+		}
+		else if(tmpA > tmpB)
+		{
+			result.push_back(tmpB);
+			j++;
+		}
+		else
+		{
+			result.push_back(tmpA);
+			i++; j++;
+		}
+
+	}
+
+
+
+
+	return result;
+}
+
+//判断常数x能否被分解成n个连续的正整数的和
+bool solution::ResolveXByContinuousN(int x, int n)
+{
+	//x=m+m+1+m+2...+m+n-1=n/2*(2m+n-1)
+	//m=x/n -(n-1)/2是整数
+	
+	float tmp = (float)x / n - (float)(n - 1) / 2;
+	if (tmp == (int)tmp)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			cout << tmp + i << ",";
+		}
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//判断常数x能否被分解成n个连续的正整数的和
+vector<vector<int>> solution::ResolveXByContinuousNumbers(int x)
+{
+	vector<vector<int>> result;
+	
+	int n = 1;
+	//x=m+m+1+m+2...+m+n-1=n/2*(2m+n-1)
+	//m=x/n -(n-1)/2是整数
+	float tmp = x;
+	while(n++,tmp > 0)
+	{
+		tmp = (float)x / n - (float)(n - 1) / 2;
+		if (tmp == (int)tmp && tmp > 0)
+		{
+			vector<int> tmpResult;
+			for (int i = 0; i < n; i++)
+			{
+				tmpResult.push_back(tmp + i);
+			}
+			result.push_back(tmpResult);
+		}
+		
+		
+	}
+	return result;
+}
 
 
 //二维数组查找
@@ -410,6 +543,8 @@ void solution::replaceSpace2(char *str, int length) {
 	}
 	str[s_size] = '\0';
 }
+
+
 
 
 //输入一个链表，从尾到头打印链表每个节点的值
@@ -774,6 +909,266 @@ ListNode* solution::ReverseList(ListNode* pHead) {
 
 
 }
+
+//单链表的排序---归并排序
+ListNode* ListGetMidNode(ListNode *pHead)
+{
+	if (pHead == NULL ) 
+		return NULL;
+
+	ListNode* quick = pHead->next;
+	ListNode* slow = pHead;
+	while (quick != NULL && quick->next != NULL)
+	{
+		slow = slow->next;
+		quick = quick->next->next;
+	}
+	ListNode* result = slow->next;
+	slow->next = NULL;		//将两个链表断开！
+	return result;
+}
+ListNode* Merge(ListNode* p1, ListNode* p2)
+{
+	ListNode* result = NULL;
+	ListNode* tmp = result;
+
+	while (p1 != NULL && p2 != NULL)
+	{
+		if (p1->val < p2->val)
+		{
+			tmp = p1;
+			tmp = tmp->next;
+			p1 = p1->next;
+		}
+		else
+		{
+			tmp = p2;
+			tmp = tmp->next;
+			p2 = p2->next;
+		}
+	}
+
+	while (p1 != NULL)
+	{
+		tmp = p1;
+	}
+	while (p1 != NULL)
+	{
+		tmp = p2;
+	}
+
+	return result;
+
+}
+ListNode* solution::ListMergeSort(ListNode *pHead)
+{
+	if (pHead == NULL)
+		return NULL;
+	if (pHead != NULL && pHead->next == NULL)	//重要：判断只剩一个节点时返回头结点
+		return pHead;
+
+	ListNode* pHead1 = pHead;
+	ListNode* pHead2 = ListGetMidNode(pHead);
+
+	pHead1 = ListMergeSort(pHead1);
+	pHead2 = ListMergeSort(pHead2);
+
+	return Merge(pHead1, pHead2);
+}
+
+//实现单链表交换任意两个元素(不包含头结点)
+ListNode* findPreListNode(ListNode* pHead, ListNode *node)
+{
+	if (pHead == NULL || node == NULL || pHead == node)
+		return NULL;
+	
+	ListNode* tmp = pHead;
+	while (pHead != NULL)
+	{
+		if (pHead != node)
+		{
+			tmp = pHead;
+			pHead = pHead->next;
+		}
+		else
+		{
+			return tmp;
+		}
+		
+	}
+	return NULL;
+}
+ListNode* solution::swapListNode(ListNode* pHead,ListNode *p,ListNode *q)
+{
+	if (p == pHead || q == pHead || pHead == NULL)
+	{
+		return NULL;
+	}
+	if (p == q)
+	{
+		return pHead;
+	}
+
+	//如果p和q连接在一起
+	if (p->next == q)
+	{
+		ListNode* pre = findPreListNode(pHead,p);	//找到p之前的节点
+		p->next = q->next;
+		pre->next = q;
+		q->next = p;
+	}
+	else if (q->next == p)
+	{
+		ListNode* pre = findPreListNode(pHead, q);
+		q->next = p->next;
+		pre->next = p;
+		p->next = q;
+	}
+	
+	else 
+	{
+		ListNode* ppre = findPreListNode(pHead, p);
+		ListNode* qpre = findPreListNode(pHead, q);
+
+		ppre->next = q;
+		qpre->next = p;
+
+		ListNode* tmp = p->next;
+		p->next = q->next;
+		q->next = tmp;
+	}
+
+}
+
+//一个链表中包含环，求环的入口地址
+ListNode* solution::EntryNodeOfLoop(ListNode *pHead)
+{
+	int LoopCount = 0;
+	if (pHead == NULL)
+	{
+		return NULL;
+	}
+	ListNode *pSlow = pHead;
+
+	ListNode *pFast = pSlow->next;
+	if (pFast == NULL)
+	{
+		return NULL;
+	}
+
+
+	//找到快慢指针的交点，其交点必然在环中
+	while (pFast != pSlow)
+	{
+		if (pFast->next == NULL)
+		{
+			return NULL;		//如果有空节点，说明链表不存在环，返回NULL
+		}
+		if (pFast->next->next == NULL)
+		{
+			return NULL;		//如果有空节点，说明链表不存在环，返回NULL
+		}
+
+		pFast = pFast->next->next;
+		pSlow = pSlow->next;
+	}
+
+	//慢指针继续转，快指针不动
+	pSlow = pSlow->next;
+	LoopCount = 1;
+	//找到环的节点数
+	while (pFast != pSlow)
+	{
+		pSlow = pSlow->next;
+		LoopCount++;
+	}
+	//将快慢指针都指向pHead
+	pFast = pHead;
+	pSlow = pHead;
+
+	//将快指针的起始节点增加LoopCount,慢指针从pHead开始走
+	while (LoopCount != 0)
+	{
+		pFast = pFast->next;
+		LoopCount--;
+	}
+
+	while (pFast != pSlow)
+	{
+		pFast = pFast->next;
+		pSlow = pSlow->next;
+	}
+
+	return pSlow;
+
+}
+
+//在一个排序的链表中删除列表中重复的节点，重复的不保留。如1-2-3-3-4-4-5处理过后1-2-5
+ListNode* solution::deleteDuplication(ListNode* pHead)
+{
+	if (pHead == NULL || pHead->next == NULL)
+	{
+		return pHead;
+	}
+	if (pHead->val == pHead->next->val)		//如果当前节点是重复节点
+	{
+		ListNode *pNode = pHead->next;
+		while (pNode != NULL && pNode->val == pHead->val)
+		{
+			pNode = pNode->next;		//跳过与当前节点相同的节点
+		}
+
+		return deleteDuplication(pNode);				//不保留当前节点，从当前节点开始递归
+
+
+	}
+	else
+	{
+		pHead->next = deleteDuplication(pHead->next);	//保留当前节点，从下个节点开始递归
+		return pHead;
+	}
+}
+
+//如何删除无序的单链表中的重复节点
+//使用unordered_map实现
+ListNode* solution::deleteDuplicationInDisOrderList(ListNode* pHead)
+{
+	ListNode* tmp = pHead;
+
+	unordered_map<int, int> map;
+	map[pHead->val] = 1;
+	if (pHead == NULL || pHead->next == NULL)
+		return pHead;
+	
+	while (tmp->next != NULL)
+	{
+		if (map.find(tmp->next->val) != map.end())	//有重复的元素
+		{
+			ListNode* toBeDeleted = tmp->next;		//标记重复的元素
+			tmp->next = tmp->next->next;			//指向下一个元素
+			delete toBeDeleted;						//删除重复的元素
+		}
+		else										//如果没有重复的元素
+		{
+			map[tmp->next->val] = 1;				//使用map保存
+			tmp = tmp->next;
+		}
+		
+	}
+
+
+
+	return pHead;
+}
+
+
+//判断两个链表是否交叉（即尾部重合）
+//1、将其中一个链表的尾部连接到首部构成一个环，判断另一条链表是否有环，使用快慢指针的方式
+//2、分别遍历求出两个链表的长度，将长的链表先移动长度差个单位，比较相同index的节点是否相同
+//代码略
+
+
+
 
 //输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 ListNode* solution::Merge(ListNode* pHead1, ListNode* pHead2)
@@ -1956,95 +2351,8 @@ vector<int>  solution::multiply(const vector<int > &A)
 	return B;
 }
 
-//一个链表中包含环，求环的入口地址
-ListNode* solution::EntryNodeOfLoop(ListNode *pHead)
-{
-	int LoopCount = 0;
-	if (pHead == NULL)
-	{
-		return NULL;
-	}
-	ListNode *pSlow = pHead;
-	
-	ListNode *pFast = pSlow->next;
-	if (pFast == NULL)
-	{
-		return NULL;
-	}
-	
-
-	//找到快慢指针的交点，其交点必然在环中
-	while (pFast != pSlow)
-	{
-		if (pFast->next == NULL)
-		{
-			return NULL;		//如果有空节点，说明链表不存在环，返回NULL
-		}
-		if (pFast->next->next == NULL)
-		{
-			return NULL;		//如果有空节点，说明链表不存在环，返回NULL
-		}
-
-		pFast = pFast->next->next;
-		pSlow = pSlow->next;
-	}
-
-	//慢指针继续转，快指针不动
-	pSlow = pSlow->next;
-	LoopCount = 1;
-	//找到环的节点数
-	while (pFast != pSlow)
-	{
-		pSlow = pSlow->next;
-		LoopCount++;
-	}
-	//将快慢指针都指向pHead
-	pFast = pHead;
-	pSlow = pHead;
-
-	//将快指针的起始节点增加LoopCount,慢指针从pHead开始走
-	while (LoopCount != 0)
-	{
-		pFast = pFast->next;
-		LoopCount--;
-	}
-
-	while (pFast != pSlow)
-	{
-		pFast = pFast->next;
-		pSlow = pSlow->next;
-	}
-
-	return pSlow;
-
-}
 
 
-//在一个排序的链表中删除列表中重复的节点，重复的不保留。如1-2-3-3-4-4-5处理过后1-2-5
-ListNode* solution::deleteDuplication(ListNode* pHead)
-{
-	if (pHead == NULL || pHead->next == NULL)
-	{
-		return pHead;
-	}
-	if (pHead->val == pHead->next->val)		//如果当前节点是重复节点
-	{
-		ListNode *pNode = pHead->next;
-		while (pNode != NULL && pNode->val == pHead->val)
-		{
-			pNode = pNode->next;		//跳过与当前节点相同的节点
-		}
-
-		return deleteDuplication(pNode);				//不保留当前节点，从当前节点开始递归
-
-
-	}
-	else
-	{
-		pHead->next = deleteDuplication(pHead->next);	//保留当前节点，从下个节点开始递归
-		return pHead;
-	}
-}
 
 //给定一个二叉树和一个节点，请找出中序遍历顺序下的下一个节点并返回，该树种包含指向左右节点和父节点的指针
 TreeLinkNode* solution::GetNext(TreeLinkNode* pNode)

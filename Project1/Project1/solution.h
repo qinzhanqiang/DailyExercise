@@ -7,6 +7,7 @@
 #include "iostream"
 #include "unordered_map"
 #include "map"
+#include "unordered_map"
 
 using namespace std;
 
@@ -65,6 +66,11 @@ public:
 	int findElementWithOddCount(vector<int> arr);
 	void findElement(vector<int> arr);
 	bool isArrayRepeat(vector<int> arr);
+	void reverseM(vector<int> &arr,int m);
+	void reverseM2(vector<int>& arr, int m);
+	vector<int> generateArrayWithAB(int a, int b, int n);
+	bool ResolveXByContinuousN(int x, int n);
+	vector<vector<int>> ResolveXByContinuousNumbers(int x);
 	bool find(int target, std::vector<std::vector<int>> array);
 
 	void replaceSpace(char * str, int length);
@@ -100,6 +106,10 @@ public:
 	ListNode * FindKthToTail(ListNode * pListHead, unsigned int k);
 
 	ListNode * ReverseList(ListNode * pHead);
+
+	ListNode * ListMergeSort(ListNode * pHead);
+
+	ListNode * swapListNode(ListNode * pHead, ListNode * p, ListNode * q);
 
 	ListNode * Merge(ListNode * pHead1, ListNode * pHead2);
 
@@ -168,6 +178,8 @@ public:
 	ListNode * EntryNodeOfLoop(ListNode * pHead);
 
 	ListNode * deleteDuplication(ListNode * pHead);
+
+	ListNode * deleteDuplicationInDisOrderList(ListNode * pHead);
 
 	TreeLinkNode * GetNext(TreeLinkNode * pNode);
 

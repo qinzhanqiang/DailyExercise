@@ -1,8 +1,7 @@
-﻿  solution.cpp
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(247): warning C4018: “<”: 有符号/无符号不匹配
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(259): warning C4018: “<”: 有符号/无符号不匹配
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(273): warning C4018: “<”: 有符号/无符号不匹配
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(288): warning C4018: “<”: 有符号/无符号不匹配
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(1716): warning C4018: “<”: 有符号/无符号不匹配
-d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\solution.cpp(2340): warning C4018: “>”: 有符号/无符号不匹配
+﻿  main.cpp
+d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(288): warning C4018: “<”: 有符号/无符号不匹配
+d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(290): warning C4018: “<”: 有符号/无符号不匹配
+d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(365): warning C4018: “<”: 有符号/无符号不匹配
+d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(376): warning C4018: “<”: 有符号/无符号不匹配
+d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(386): warning C4018: “<”: 有符号/无符号不匹配
   Project1.vcxproj -> D:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\Project1\Debug\Project1.exe

@@ -31,10 +31,10 @@ int main()
 
 	//2
 	cout << endl << "第2个测试实例" << endl ;
-	char str[] = " asdf asdf a";
+	//char str[] = " asdf asdf a";
 	
-	s.replaceSpace(str, 100);
-	cout << str << endl;
+	//s.replaceSpace(str, 100);
+	//cout << str << endl;
 
 	//3
 	cout << endl << "第3个测试实例" << endl ;
@@ -366,6 +366,86 @@ int main()
 	{
 		cout << test35[i] << endl;
 	}
+
+
+	//36
+	cout << endl << "第36个测试实例" << endl;
+	vector<int> test36 = { 10, 1,2,3,4,5,6,7,8,6,9 };
+	//s.reverseM(test36, 5);
+	s.reverseM2(test36, 5);
+	for (int i = 0; i < test36.size(); i++)
+	{
+		cout << test36[i] << endl;
+	}
+
+
+
+	//37
+	cout << endl << "第37个测试实例" << endl;
+	vector<int> result37 = s.generateArrayWithAB(3, 5, 10);
+	for (int i = 0; i < result37.size(); i++)
+	{
+		cout << result37[i] << " ";
+	}
+
+	//38
+	cout << endl << "第38个测试实例" << endl;
+	s.ResolveXByContinuousN(10, 4);
+	cout << endl;
+	vector<vector<int>> result38 = s.ResolveXByContinuousNumbers(100);
+	for (size_t i = 0; i < result38.size(); i++)
+	{
+		for (size_t j = 0; j < result38[i].size(); j++)
+		{
+			cout << result38[i][j] << ",";
+		}
+		cout << endl;
+	}
+
+	//39
+	cout << endl << "第39个测试实例" << endl;
+	ListNode* test39 = new ListNode(1);
+	test39->next = new ListNode(6);
+	test39->next->next = new ListNode(5);
+	test39->next->next->next = new ListNode(4);
+	test39->next->next->next->next = new ListNode(7);
+	test39->next->next->next->next->next = new ListNode(3);
+	test39->next->next->next->next->next->next = new ListNode(9);
+	test39->next->next->next->next->next->next->next = new ListNode(2);
+	
+	ListNode *result39 = s.ListMergeSort(test39);
+	while (result39 != NULL)
+	{
+		cout << result39->val<<",";
+		result39 = result39->next;
+	}
+	cout << endl;
+
+
+	//40
+	cout << endl << "第40个测试实例" << endl;
+	ListNode* test40 = new ListNode(1);
+	test40->next = new ListNode(6);
+	test40->next->next = new ListNode(5);
+	test40->next->next->next = new ListNode(6);
+	test40->next->next->next->next = new ListNode(7);
+	test40->next->next->next->next->next = new ListNode(1);
+	test40->next->next->next->next->next->next = new ListNode(9);
+	test40->next->next->next->next->next->next->next = new ListNode(2);
+
+	ListNode* result40 = s.deleteDuplicationInDisOrderList(test40);
+	while (result40 != NULL)
+	{
+		cout << result40->val << ",";
+		result40 = result40->next;
+	}
+	cout << endl;
+
+
+
+
+
+
 
 
 
