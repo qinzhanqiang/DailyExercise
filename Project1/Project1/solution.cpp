@@ -246,7 +246,7 @@ int solution::xor_findDup(vector<int> arr)
 int solution::findElementWithOddCount(vector<int> arr)
 {
 	int result = arr[0];
-	for (int i = 1; i < arr.size(); i++)
+	for (size_t i = 1; i < arr.size(); i++)
 	{
 		result ^= arr[i];
 	}
@@ -258,7 +258,7 @@ int solution::findElementWithOddCount(vector<int> arr)
 void solution::findElement(vector<int> arr)
 {
 	int s = 0;
-	for (int i = 0; i < arr.size(); i++)
+	for (size_t i = 0; i < arr.size(); i++)
 	{
 		s ^= arr[i];		//假设两个数分别是a,b;则s = a^b; 
 	}
@@ -272,7 +272,7 @@ void solution::findElement(vector<int> arr)
 		k++;
 	}
 
-	for (int i = 0; i < arr.size(); i++)
+	for (size_t i = 0; i < arr.size(); i++)
 	{
 		if ((arr[i] >> k) & 0x01)	//遍历数组，找到第k位为1的求异或，得到第一个数
 		{
@@ -287,7 +287,7 @@ void solution::findElement(vector<int> arr)
 bool solution::isArrayRepeat(vector<int> arr)
 {
 	//int j = arr[0];
-	for (int i = 0; i < arr.size(); i++)
+	for (size_t i = 0; i < arr.size(); i++)
 	{
 		if (arr[i] == i + 1)			//如果arr[i] == i+1
 			continue;
@@ -418,7 +418,7 @@ vector<vector<int>> solution::ResolveXByContinuousNumbers(int x)
 	int n = 1;
 	//x=m+m+1+m+2...+m+n-1=n/2*(2m+n-1)
 	//m=x/n -(n-1)/2是整数
-	float tmp = x;
+	float tmp = (float)x;
 	while(n++,tmp > 0)
 	{
 		tmp = (float)x / n - (float)(n - 1) / 2;
@@ -427,7 +427,7 @@ vector<vector<int>> solution::ResolveXByContinuousNumbers(int x)
 			vector<int> tmpResult;
 			for (int i = 0; i < n; i++)
 			{
-				tmpResult.push_back(tmp + i);
+				tmpResult.push_back((int)tmp + i);
 			}
 			result.push_back(tmpResult);
 		}
@@ -1038,6 +1038,7 @@ ListNode* solution::swapListNode(ListNode* pHead,ListNode *p,ListNode *q)
 		q->next = tmp;
 	}
 
+	return pHead;
 }
 
 //一个链表中包含环，求环的入口地址
@@ -1842,6 +1843,28 @@ vector<string> solution::Permutation(string str) {
 	return result;
 }
 
+//查找打印出字符串中每个字符出现的次数
+void solution::findCharCountInString(string str)
+{
+	unordered_map<char, int> map;
+
+	string::iterator iter;
+	for (iter = str.begin();iter != str.end(); iter++)
+	{
+		map[*iter]++;		//使用hashmap将数据保存下来
+	}
+	unordered_map<char,int>::iterator it;	//定义一个迭代器
+	for (it = map.begin(); it != map.end(); it++)
+	{
+
+		//printf("The count of %c is: %d\n", it->first, it->second);
+		cout << "The count of " << it->first << " is: " << it->second << endl;	//map键值对的遍历，it->first和it->second
+	}
+}
+
+
+
+
 
 //HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天测试组开完会后,他又发话了:在古老的一维模式识别中,常常需要计算连续子向量的最大和,
 //当向量全为正数的时候,问题很好解决。但是,如果向量中包含负数,是否应该包含某个负数,并期望旁边的正数会弥补它呢？
@@ -2108,7 +2131,7 @@ vector<int> solution::FindNumbersWithSum2(vector<int> array, int sum)
 	unordered_map<int,int> m;		//使用hashmap之后时间复杂度降低到O(n)，会占用更多空间
 	vector<int> result;
 
-	for (auto i=0;i < array.size();i++)
+	for (size_t i=0;i < array.size();i++)
 	{
 		int value = sum - array[i];		//找到当前对应的值
 
@@ -2393,6 +2416,30 @@ TreeLinkNode* solution::GetNext(TreeLinkNode* pNode)
 }
 
 
+//找出1000个数中的前50个数
+//使用一种思想，先找到50个数放进set里，然后遍历每个数，比较与set中最大的的关系 其时间复杂度为O(nlogk)
+multiset<int> solution::findTopKFromArray(vector<int> &arr,int k)
+{
+	multiset<int> result ;		//multiset是可以重复的有序的集合，底层实现是红黑树，其查找、插入、删除等时间复杂度是O(logn)
+	int len = arr.size();
+
+	for (int i = 0; i < k; i++)
+	{
+		result.insert(arr[i]);		//O(k)
+	}
+
+	
+	for (int i = k; i < len; i++)			//O(n)
+	{
+		if (arr[i] < *(--result.end()))	//升序排列
+		{
+			result.erase(--result.end());	//O(logk)
+			result.insert(arr[i]);			//O(logk)
+		}
+	}
+
+	return result;
+}
 
 
 
@@ -2645,7 +2692,7 @@ TreeNode* solution::KthNode(TreeNode* pRoot, int k)
 
 	KthNodeInorder(pRoot,k, result);
 
-	if (k>result.size())
+	if ( k > (int)result.size())
 	{
 		return NULL;
 	}

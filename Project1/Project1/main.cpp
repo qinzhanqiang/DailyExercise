@@ -442,9 +442,19 @@ int main()
 	cout << endl;
 
 
+	//41
+	cout << endl << "第41个测试实例" << endl;
+	s.findCharCountInString("asdffasdfafajigsaf");
 
 
-
+	//42
+	cout << endl << "第42个测试实例" << endl;
+	vector<int> test42(1000, 0);
+	for (int i = 0; i < 1000; i++)
+	{
+		test42[i] = rand() % 1000;
+	}
+	multiset<int> result42 = s.findTopKFromArray(test42, 30);
 
 
 

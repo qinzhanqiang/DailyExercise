@@ -145,6 +145,8 @@ public:
 
 	vector<string> Permutation(string str);
 
+	void findCharCountInString(string str);
+
 	int FindGreatestSumOfSubArray(vector<int> array);
 
 	vector<vector<int>> FindPath(TreeNode * root, int expectNumber);
@@ -182,6 +184,8 @@ public:
 	ListNode * deleteDuplicationInDisOrderList(ListNode * pHead);
 
 	TreeLinkNode * GetNext(TreeLinkNode * pNode);
+
+	multiset<int> findTopKFromArray(vector<int> &arr,int k);
 
 	bool match(char * str, char * pattern);
 

@@ -1,7 +1,11 @@
-﻿  main.cpp
+﻿  solution.cpp
+  main.cpp
 d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(288): warning C4018: “<”: 有符号/无符号不匹配
 d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(290): warning C4018: “<”: 有符号/无符号不匹配
 d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(365): warning C4018: “<”: 有符号/无符号不匹配
 d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(376): warning C4018: “<”: 有符号/无符号不匹配
 d:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\project1\project1\main.cpp(386): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  Leetcode.cpp
   Project1.vcxproj -> D:\桌面win10\百度云同步盘\百度云同步盘\剑指offer\Project1\Debug\Project1.exe
