@@ -122,6 +122,7 @@
     <ClInclude Include="Leetcode.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="RBTree.h" />
+    <ClInclude Include="smartPointer.h" />
     <ClInclude Include="solution.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>

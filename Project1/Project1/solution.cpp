@@ -2425,7 +2425,7 @@ multiset<int> solution::findTopKFromArray(vector<int> &arr,int k)
 
 	for (int i = 0; i < k; i++)
 	{
-		result.insert(arr[i]);		//O(k)
+		result.insert(arr[i]);		//
 	}
 
 	

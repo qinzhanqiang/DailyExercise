@@ -2,6 +2,8 @@
 #include "solution.h"
 #include "Leetcode.h"
 #include "main.h"
+#include "smartPointer.h"
+
 using namespace std;
 
 int main()
@@ -285,9 +287,9 @@ int main()
 	test26->right->left = new struct TreeNode(3);
 	test26->right->right = new struct TreeNode(2);
 	vector<vector<int>> result26 = s.print(test26);
-	for (auto i = 0;i<result26.size();i++)
+	for (size_t i = 0;i<result26.size();i++)
 	{
-		for (auto j=0;j<result26[i].size();j++)
+		for (size_t j=0;j<result26[i].size();j++)
 		{
 			cout << result26[i][j]<<endl;
 		}
@@ -362,7 +364,7 @@ int main()
 	cout << endl << "第35个测试实例" << endl;
 	vector<int> test35 = { 10, 1,2,3,4,5,6,7,8,6,9 };
 	s.reOrderArray2(test35);
-	for (int i = 0; i < test35.size(); i++)
+	for (size_t i = 0; i < test35.size(); i++)
 	{
 		cout << test35[i] << endl;
 	}
@@ -373,7 +375,7 @@ int main()
 	vector<int> test36 = { 10, 1,2,3,4,5,6,7,8,6,9 };
 	//s.reverseM(test36, 5);
 	s.reverseM2(test36, 5);
-	for (int i = 0; i < test36.size(); i++)
+	for (size_t i = 0; i < test36.size(); i++)
 	{
 		cout << test36[i] << endl;
 	}
@@ -383,7 +385,7 @@ int main()
 	//37
 	cout << endl << "第37个测试实例" << endl;
 	vector<int> result37 = s.generateArrayWithAB(3, 5, 10);
-	for (int i = 0; i < result37.size(); i++)
+	for (size_t i = 0; i < result37.size(); i++)
 	{
 		cout << result37[i] << " ";
 	}
@@ -456,7 +458,7 @@ int main()
 	}
 	multiset<int> result42 = s.findTopKFromArray(test42, 30);
 
-
+	
 
 
 	system("pause");
