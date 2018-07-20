@@ -2018,6 +2018,8 @@ int solution::findSecondMax(vector<int> &data)
 	return second;
 }
 
+
+
 //求树的最长路径
 int TreeDepth(TreeNode *pRoot)
 {
@@ -2441,7 +2443,27 @@ multiset<int> solution::findTopKFromArray(vector<int> &arr,int k)
 	return result;
 }
 
+//求两个数的最大公约数----辗转相除法
+int solution::findGrestestCommDivisor(int a, int b)
+{
+	assert(a != 0 && b != 0);
 
+	if (a < b)
+	{
+		int tmp = b;
+		b = a;
+		a = tmp;
+	}
+
+	while (a % b != 0)		
+	{
+		int tmp = a % b;
+		a = b;
+		b = tmp;
+	}
+
+	return b;
+}
 
 
 
@@ -2587,6 +2609,83 @@ int solution::findMaxSubString(string str1, string str2,string &result)
 
 	return MaxLen;
 }
+
+//求二叉树的最小深度
+int solution::findMinDepthOfTree(TreeNode* pHead)
+{
+	queue<TreeNode*> q;
+	int count = 0;
+	TreeNode* now = pHead;
+	
+	if (pHead == NULL)
+	{
+		return 0;
+	}
+	if (pHead->left == NULL && pHead->right == NULL)	//如果只有一个头结点，则返回1
+	{
+		return 1;
+	}
+
+	q.push(pHead);
+	
+
+	while (!q.empty())
+	{
+		int len = q.size();
+		count++;
+
+
+		for (int i = 0; i < len; i++)	//每次讲上次保存的一层处理完
+		{
+			now = q.front();
+			if (now->left == NULL && now->right == NULL)
+			{
+				return count;
+			}
+			if (now->left != NULL)
+			{
+				q.push(now->left);
+			}
+			if (now->right != NULL)
+			{
+				q.push(now->right);
+			}
+			q.pop();
+		}
+
+	}
+
+	return count;
+}
+
+//给一个二叉树，返回其后序遍历的值
+void __printPostOrderValue(TreeNode* pRoot,vector<int> &result)
+{
+	if (pRoot == NULL)
+	{
+		return;
+	}
+	if (pRoot->left != NULL)
+	{
+		__printPostOrderValue(pRoot->left, result);
+	}
+	if (pRoot->right != NULL)
+	{
+		__printPostOrderValue(pRoot->right, result);
+	}
+	result.push_back(pRoot->val);
+}
+vector<int> solution::printPostOrderValue(TreeNode* pRoot)
+{
+	vector<int> result;
+	
+	__printPostOrderValue(pRoot, result);
+
+	return result;
+
+}
+
+
 
 //判断一颗二叉树是否对称
 bool comRoot(TreeNode* left, TreeNode* right)

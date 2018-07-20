@@ -458,6 +458,14 @@ int main()
 	}
 	multiset<int> result42 = s.findTopKFromArray(test42, 30);
 
+
+	//43
+	cout << endl << "µÚ43¸ö²âÊÔÊµÀý" << endl;
+	TreeNode* test43 = new TreeNode(1);
+	test43->left = new TreeNode(2);
+	test43->right = new TreeNode(3);
+	test43->left->left = new TreeNode(4);
+	cout << s.findMinDepthOfTree(test43) << endl;;
 	
 
 

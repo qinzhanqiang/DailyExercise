@@ -187,9 +187,15 @@ public:
 
 	multiset<int> findTopKFromArray(vector<int> &arr,int k);
 
+	int findGrestestCommDivisor(int a, int b);
+
 	bool match(char * str, char * pattern);
 
 	int findMaxSubString(string str1, string str2, string & result);
+
+	int findMinDepthOfTree(TreeNode * pHead);
+
+	vector<int> printPostOrderValue(TreeNode * pRoot);
 
 	bool isSymmetrical(TreeNode * pRoot);
 
