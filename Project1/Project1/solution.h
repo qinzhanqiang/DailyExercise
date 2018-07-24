@@ -8,6 +8,8 @@
 #include "unordered_map"
 #include "map"
 #include "unordered_map"
+#include "stdarg.h"
+
 
 using namespace std;
 
@@ -185,6 +187,8 @@ public:
 
 	TreeLinkNode * GetNext(TreeLinkNode * pNode);
 
+	void printPostOrder(int *preOrder, int *inOrder, int count);
+
 	multiset<int> findTopKFromArray(vector<int> &arr,int k);
 
 	int findGrestestCommDivisor(int a, int b);
@@ -196,6 +200,12 @@ public:
 	int findMinDepthOfTree(TreeNode * pHead);
 
 	vector<int> printPostOrderValue(TreeNode * pRoot);
+
+	void depthFirstSearch(TreeNode * root);
+
+	void widthFirstSearch(TreeNode * root);
+
+	TreeNode* makeTree(int root, ...);
 
 	bool isSymmetrical(TreeNode * pRoot);
 

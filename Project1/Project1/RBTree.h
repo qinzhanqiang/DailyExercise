@@ -23,5 +23,15 @@ public:
 	RBTree();
 	~RBTree();
 
+	void leftRotate(RBTNode<T>*& root, RBTNode<T>* x);
+
+	void rightRotate(RBTNode<T>*& root, RBTNode<T>* x);
+
+	void insert(RBTNode<T>*& root, RBTNode<T>* node);
+
+	void insertFixUp(RBTNode<T>*& root, RBTNode<T>* node);
+
+	void insert(T key);
+
 };
 

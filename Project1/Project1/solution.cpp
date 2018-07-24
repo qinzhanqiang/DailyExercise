@@ -2417,6 +2417,65 @@ TreeLinkNode* solution::GetNext(TreeLinkNode* pNode)
 
 }
 
+//根据前序遍历和中序遍历打印出后序遍历
+TreeNode* constructTree(int *startPreOrder, int *endPreOrder, int *startInOrder, int *endInOrder)
+{
+	TreeNode *root = new TreeNode(*startPreOrder);	//前序遍历的第一个节点是根节点
+
+	if (startPreOrder == startInOrder)				//判断
+	{
+		if (*startPreOrder == *startInOrder)
+		{
+			return root;
+		}
+		else
+		{
+			cout << "wrong inputs!" << endl;
+			return NULL;
+		}
+	}
+
+	int* rootIndex = startInOrder;
+	while (*startPreOrder != *rootIndex && rootIndex < endInOrder)	//在中序遍历中找到根节点
+	{
+		rootIndex++;
+	}
+
+	int leftLength = rootIndex - startInOrder;
+	int* leftPreOrderEnd = startPreOrder + leftLength;
+	
+	if (leftLength > 0)		//如果前序遍历左子树序列长度长度大于0，则构建左子树
+	{
+		root->left = constructTree(startPreOrder + 1, leftPreOrderEnd, startInOrder, rootIndex - 1);
+	}
+	if (endPreOrder - leftPreOrderEnd > 0)		//如果前序遍历右子树序列长度长度大于0，则构建右子树
+	{
+		root->right = constructTree(leftPreOrderEnd + 1, endPreOrder, rootIndex + 1, endInOrder);
+	}
+
+	return root;
+
+}
+void _printPostOrder(TreeNode* root)
+{
+	if (root == NULL)
+		return;
+
+	_printPostOrder(root->left);
+	_printPostOrder(root->right);
+	cout << root->val << " ";
+}
+void solution::printPostOrder(int *preOrder,int *inOrder,int len)
+{
+	if (preOrder == NULL || inOrder == NULL || len <= 0)
+	{
+		cout << "wrong inputs!" << endl;
+		return;
+	}
+	TreeNode* root = constructTree(preOrder, preOrder + len - 1, inOrder, inOrder + len - 1);
+
+	_printPostOrder(root);
+}
 
 //找出1000个数中的前50个数
 //使用一种思想，先找到50个数放进set里，然后遍历每个数，比较与set中最大的的关系 其时间复杂度为O(nlogk)
@@ -2685,6 +2744,89 @@ vector<int> solution::printPostOrderValue(TreeNode* pRoot)
 
 }
 
+//二叉树的深度优先遍历和广度优先遍历
+void solution::depthFirstSearch(TreeNode* root)
+{
+	if (root == NULL)	return;
+	stack<TreeNode*> stack;
+	stack.push(root);
+	TreeNode* node;
+	while (!stack.empty())
+	{
+		node = stack.top();
+		cout << node->val << " ";		//遍历根节点
+		stack.pop();
+
+
+		if (node->right != NULL)		//先将右子树压栈
+			stack.push(node->right);
+		if (node->left != NULL)			//再将左子树压栈
+			stack.push(node->left);
+
+	}
+	cout << endl;
+}
+
+void solution::widthFirstSearch(TreeNode* root)
+{
+	if (root == NULL) return;
+	queue<TreeNode*> queue;
+	queue.push(root);
+	TreeNode* tmp;
+
+	while (!queue.empty())
+	{
+		tmp = queue.front();
+		cout << tmp->val << " ";
+		if (tmp->left != NULL)
+		{
+			queue.push(tmp->left);
+		}
+		if (tmp->right != NULL)
+		{
+			queue.push(tmp->right);
+		}
+		queue.pop();
+	}
+	cout << endl;
+}
+
+TreeNode* solution::makeTree(int root, ...)
+{
+	TreeNode* pRoot = new TreeNode(root);
+	TreeNode* tmp = pRoot;
+	queue<TreeNode*> stack;
+	stack.push(tmp);
+
+	va_list arg_ptr;
+	va_start(arg_ptr, root);
+
+	int n = va_arg(arg_ptr, int);
+	while (n > 0)
+	{
+		if (tmp->left == NULL)
+		{
+			tmp->left = new TreeNode(n);
+			stack.push(tmp->left);
+			n = va_arg(arg_ptr, int);
+			continue;
+		}
+		if (tmp->right == NULL)
+		{
+			tmp->right = new TreeNode(n);
+			stack.push(tmp->right);
+			n = va_arg(arg_ptr, int);
+			continue;
+		}
+		
+		
+		tmp = stack.front();
+		stack.pop();
+	}
+	va_end(arg_ptr);
+
+	return pRoot;
+}
 
 
 //判断一颗二叉树是否对称

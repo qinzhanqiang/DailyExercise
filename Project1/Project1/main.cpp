@@ -3,6 +3,7 @@
 #include "Leetcode.h"
 #include "main.h"
 #include "smartPointer.h"
+#include "RBTree.h"
 
 using namespace std;
 
@@ -467,6 +468,29 @@ int main()
 	test43->left->left = new TreeNode(4);
 	cout << s.findMinDepthOfTree(test43) << endl;;
 	
+	//44
+	/*
+	cout << endl << "第44个测试实例" << endl;
+	count = 0;
+	cin >> count;
+	int* preOrder = new int[count];
+	int* inOrder = new int[count];
+	for (int i = 0; i < count; i++)
+	{
+		cin >> preOrder[i];
+	}
+	for (int i = 0; i < count; i++)
+	{
+		cin >> inOrder[i];
+	}
+	s.printPostOrder(preOrder, inOrder,count);
+	*/
+	
+	//45
+	cout << endl << "第45个测试实例" << endl;
+	TreeNode* root45 = s.makeTree(1, 2, 3, 4, 5,6,7,8,9);
+	s.depthFirstSearch(root45);
+	s.widthFirstSearch(root45);
 
 
 	system("pause");
